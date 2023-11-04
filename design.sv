@@ -1,0 +1,72 @@
+module seqdetector(in,clk,out);
+  input in,clk;
+  output reg out;
+  parameter s0=0,s1=1,s2=2,s3=3;
+  reg [1:0]state;
+  always @ (posedge clk)
+    begin
+      case(state)
+        s0:begin
+          if(!in)
+            begin
+              state<=s1;
+              out<=1'b0;
+            end
+          else
+            begin
+              state<=s0;
+              out<=1'b0;
+            end
+        end
+        s1:begin
+          if(!in)
+            begin
+              state<=s1;
+              out<=1'b0;
+            end
+          else
+            begin
+              state<=s2;
+              out<=1'b0;
+            end
+        end
+        s2:begin
+          if(!in)
+            begin
+              state<=s1;
+              out<=1'b0;
+            end
+          else
+            begin
+              state<=s3;
+              out<=1'b0;
+            end
+        end
+        s3:begin
+          if(!in)
+            begin
+              state<=s1;
+              out<=1'b1;
+            end
+          else
+            begin
+              state<=s0;
+              out<=1'b0;
+            end
+        end
+        default:
+          begin
+          if(!in)
+            begin
+              state<=s1;
+              out<=1'b0;
+            end
+          else
+            begin
+              state<=s0;
+              out<=1'b0;
+            end
+        end
+      endcase
+    end
+endmodule
